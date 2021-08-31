@@ -5,6 +5,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+::after,::before{
+  box-sizing: border-box;
+}
 body{
   font-family: $font-hei;
   font-size: 16px;
@@ -22,6 +25,7 @@ a{
 }
 ul, ol{
   list-style: none;
+
 }
 button, input{
   font: inherit;
