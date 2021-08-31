@@ -3,13 +3,31 @@ import styled from 'styled-components';
 
 
 const Div=styled.div`
-  background: rgb(240, 239, 244);
   .buttons {
+    display: grid;
+    grid-template-columns: repeat(4,25%);
+    grid-template-rows: repeat(4, 56px);
+    background: #F0EFF4;
+    padding: 6px 10px;
     button {
-      background: rgb(243, 243, 243);
-      width: 25%;
-      padding: 6px 10px;
-      border: none;
+      font-size: 22px;
+      background: #F3F3F3;
+      margin: 3px;
+      border: 1px solid #CACACA;
+      &.ok{
+        color: white;
+        font-size: 20px;
+        font-weight: lighter;
+        background: #1671CE;
+        grid-row-start: 3;
+        grid-row-end: 5;
+        grid-column-start: 4;
+        grid-column-end:5;
+      }
+      &.zero {
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
     }
   }
 `
@@ -28,9 +46,9 @@ const NumberPad=()=>{
                 <button >7</button>
                 <button >8</button>
                 <button >9</button>
-                <button >OK</button>
+                <button className="ok">OK</button>
                 <button >.</button>
-                <button >0</button>
+                <button className="zero">0</button>
             </div>
         </Div>
     )
