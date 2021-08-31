@@ -1,61 +1,42 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import styled from 'styled-components';
+import Icon from '../Icon';
 
-
-const useStyles = makeStyles((theme) => ({
-    button: {
-        display: 'block',
-        marginTop: theme.spacing(2),
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-    },
-}));
-const Div=styled.div`
-   
+const Did=styled.div`
+  display: flex;
+  margin: 20px;
+  .type {
+    padding: 5px 5px;
+    border-radius: 10px;
+    background: rgb(255, 217, 28);
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    span {
+      padding-right: 6px;
+      padding-left: 6px;
+    }
+    }
+  .output{
+    flex-grow: 1;
+    line-height: 46px;
+    background: rgb(241, 241, 241);
+    font-size: 36px;
+    text-align: right;
+    padding: 0 16px;
+    margin-left: 7px;
+    border-radius: 8px;
+  }
 `
-
-export default function Type() {
-    const classes = useStyles();
-    const [age, setAge] = React.useState('');
-    const [open, setOpen] = React.useState(false);
-
-    const handleChange = (event:any) => {
-        setAge(event.target.value);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
+const Type=()=>{
     return (
-        <Div>
-            <FormControl className={classes.formControl}>
-                <InputLabel id="demo-controlled-open-select-label">类型</InputLabel>
-                <Select
-                    labelId="demo-controlled-open-select-label"
-                    id="demo-controlled-open-select"
-                    open={open}
-                    onClose={handleClose}
-                    onOpen={handleOpen}
-                    value={age}
-                    onChange={handleChange}
-                >
-
-                    <MenuItem value="-">支出</MenuItem>
-                    <MenuItem value="+">收人</MenuItem>
-                </Select>
-            </FormControl>
-        </Div>
-    );
+        <Did>
+            <div className="type">
+                <span>收入</span>
+                <Icon  name="下拉"/>
+            </div>
+           <div className="output">0</div>
+        </Did>
+    )
 }
+export default Type
