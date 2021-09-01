@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import Icon from '../Icon';
 
 
 const Div=styled.div`
+   .topButton{
+     background: #F0EFF4;
+     text-align: center;
+     margin-bottom: 5px;
+   }
   .buttons {
     display: grid;
     grid-template-columns: repeat(4,25%);
@@ -34,6 +40,9 @@ const Div=styled.div`
 const NumberPad=()=>{
     return(
         <Div>
+            <div className="topButton">
+                <Icon name="下拉2"/>
+            </div>
             <div className="buttons">
                 <button >1</button>
                 <button >2</button>

@@ -20,7 +20,7 @@ const FormItem=()=>{
     return(
         <Div>
             <span>备注:</span>
-            <input type="text" value="写点备注吧"/>
+            <input type="text" placeholder="写点备注吧"/>
         </Div>
     )
 }
