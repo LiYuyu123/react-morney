@@ -3,17 +3,18 @@ import React from 'react';
 import Type from '../components/money/Type';
 import NumberPad from '../components/money/NumberPad';
 import Tags from '../components/money/tags';
-
+import FormItem from '../components/money/FormItem';
 
 
 function Money() {
     return (
         <Layout>
-       <Type/>
-        <NumberPad/>
-         <Tags/>
+            <Type/>
+            <FormItem/>
+            <Tags/>
+            <NumberPad/>
         </Layout>
     );
 }
 
-export default Money
+export default Money;

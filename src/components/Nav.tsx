@@ -6,9 +6,9 @@ import Icon from './Icon';
 
 const NavWrapper = styled.nav`
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);;
-  !important;
-  > ul {
-  display: flex;
+  > ol {
+    display: flex;
+    margin-bottom:0;
     !important;
   >li {
     width: 33.3%;
@@ -17,7 +17,6 @@ const NavWrapper = styled.nav`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    !important;
     .link{
       display: flex;
       justify-content: center;
@@ -39,7 +38,7 @@ const NavWrapper = styled.nav`
 const Nav=()=>{
     return(
         <NavWrapper>
-            <ul>
+            <ol>
                 <li>
                     <NavLink className="link" to="/labels" activeClassName="selected">
                         <Icon name="label"/>
@@ -58,7 +57,7 @@ const Nav=()=>{
                         <span>统计</span>
                     </NavLink>
                 </li>
-            </ul>
+            </ol>
         </NavWrapper>
     )
 }
