@@ -5,14 +5,14 @@ import Icon from '../Icon';
 const Did=styled.div`
   display: flex;
   margin: 20px;
-  .type {
+  >.type {
     padding: 5px 5px;
     border-radius: 10px;
     background: rgb(255, 217, 28);
     display: flex;
     align-items: center;
     font-weight: 800;
-    span {
+    >span {
       padding-right: 6px;
       padding-left: 6px;
     }
