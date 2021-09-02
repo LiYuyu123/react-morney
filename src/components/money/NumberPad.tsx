@@ -41,13 +41,45 @@ const Div=styled.div`
 
 const NumberPad:React.FC=()=>{
     const {output,setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
+    const onButtonWrapper=(e:React.MouseEvent)=>{
+        const text= (e.target as HTMLButtonElement).textContent
+        if(text===null){return}
+          switch (text){
+              case '0':
+              case '1':
+              case '2':
+              case '3':
+              case '4':
+              case '5':
+              case '6':
+              case '7':
+              case '8':
+              case '9':
+              case '.':
+                  if(output==='0'){
+                      setOutput(text)
+                  }else {
+                      setOutput(output+text)
+                  }
+                  break;
+              case '删除':
+                  console.log('删除')
+                  break;
+              case '清空':
+                  console.log('清空')
+                  break;
+              case 'ok':
+                  console.log('ok')
+                  break;
+          }
+    }
     return(
         <Div>
             {appear ?<div>
                 <div className="topButton" onClick={()=>setAppear(false)}>
                     <Icon name="下拉2"/>
                 </div>
-                <div className="buttons">
+                <div className="buttons" onClick={onButtonWrapper}>
                     <button >1</button>
                     <button >2</button>
                     <button >3</button>
