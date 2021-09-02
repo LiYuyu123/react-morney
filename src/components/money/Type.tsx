@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
+import {TypeNumberPad} from '../../views/Money';
 
 
 const Did = styled.div`
@@ -25,7 +26,6 @@ const Did = styled.div`
     display: flex;
     align-items: center;
     font-weight: 800;
-
     > span {
       padding-right: 6px;
       padding-left: 6px;
@@ -44,6 +44,7 @@ const Did = styled.div`
   }
 `;
 const Type: React.FC = () => {
+    const {output,setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
     const [type, setType] = useState( '-');
     const [state, setState] = useState(false);
     const onClick = () => {
@@ -62,7 +63,7 @@ const Type: React.FC = () => {
         <Did>
             <div className="type" onClick={onClick}>{type==='+' ? <span>收入</span>: <span>支出</span>}<Icon name="下拉"/></div>
             {state ? <div className="pay" onClick={onClick2}>{type==='+' ? <span>支出</span>: <span>收入</span>}</div> : ''}
-            <div className="output">0</div>
+            <div className="output" onClick={()=>setAppear(true)}>{output}</div>
         </Did>
     )
 }

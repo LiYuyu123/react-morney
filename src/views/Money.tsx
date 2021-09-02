@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import React from 'react';
+import React, {createContext, useState} from 'react';
 import Type from '../components/money/Type';
 import NumberPad from '../components/money/NumberPad';
 import Tags from '../components/money/tags';
@@ -15,16 +15,27 @@ const MyLayout=styled(Layout)`
     overflow: auto;
   }
 `
+type ContextType= {
+    output: string
+    setOutput:  React.Dispatch<React.SetStateAction<string>>
+    appear:boolean
+    setAppear: React.Dispatch<React.SetStateAction<boolean>>
+}
+export const TypeNumberPad=createContext<ContextType | null>(null)
 
 function Money() {
+    const [output,setOutput]=useState('0')
+    const [appear,setAppear]=useState(false)
     return (
         <MyLayout>
+            <TypeNumberPad.Provider value={{output,setOutput,appear,setAppear}}>
             <Type/>
             <FormItem/>
             <div className="wrapperTags">
                 <Tags/>
             </div>
             <NumberPad/>
+            </TypeNumberPad.Provider>
         </MyLayout>
 
 

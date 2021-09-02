@@ -4,9 +4,11 @@ import styled from 'styled-components';
 
 const Div=styled.div`
   display: flex;
-  margin:20px 35px;
+  margin:20px;
+  padding-left: 10px;
   >span{
     color:rgb(176, 176, 176) ;
+    font-size: 14px;
   }
   >input{
     border: none;

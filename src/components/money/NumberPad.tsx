@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
-
+import {TypeNumberPad} from '../../views/Money';
 
 const Div=styled.div`
    .topButton{
@@ -37,28 +37,33 @@ const Div=styled.div`
     }
   }
 `
-const NumberPad=()=>{
+
+
+const NumberPad:React.FC=()=>{
+    const {output,setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
     return(
         <Div>
-            <div className="topButton">
-                <Icon name="下拉2"/>
-            </div>
-            <div className="buttons">
-                <button >1</button>
-                <button >2</button>
-                <button >3</button>
-                <button>删除</button>
-                <button >4</button>
-                <button >5</button>
-                <button >6</button>
-                <button>清空</button>
-                <button >7</button>
-                <button >8</button>
-                <button >9</button>
-                <button className="ok">OK</button>
-                <button >.</button>
-                <button className="zero">0</button>
-            </div>
+            {appear ?<div>
+                <div className="topButton" onClick={()=>setAppear(false)}>
+                    <Icon name="下拉2"/>
+                </div>
+                <div className="buttons">
+                    <button >1</button>
+                    <button >2</button>
+                    <button >3</button>
+                    <button>删除</button>
+                    <button >4</button>
+                    <button >5</button>
+                    <button >6</button>
+                    <button>清空</button>
+                    <button >7</button>
+                    <button >8</button>
+                    <button >9</button>
+                    <button className="ok">OK</button>
+                    <button >.</button>
+                    <button className="zero">0</button>
+                </div>
+            </div>:''}
         </Div>
     )
 }

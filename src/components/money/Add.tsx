@@ -18,8 +18,7 @@ const Div=styled.div`
 const Add= () => {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const [newTag,setNewTag]=useState<any>(null)
-    // @ts-ignore
-    const {tags,setTags}=useContext(AllTags)
+    const {tags,setTags}=useContext<any>(AllTags)
 
     const showModal = () => {
         setIsModalVisible(true);
