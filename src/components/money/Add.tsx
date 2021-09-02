@@ -47,7 +47,7 @@ const Add= () => {
                 新增标签
             </Button>
             <Modal title="新增标签" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <Input placeholder="写点什么吧" onChange={inputChange} />
+                <Input placeholder="写点什么吧" onChange={inputChange}  />
             </Modal>
         </Div>
     );

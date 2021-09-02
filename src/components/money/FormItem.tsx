@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import styled from 'styled-components';
 
 
@@ -16,11 +16,23 @@ const Div=styled.div`
     color: rgb(176, 176, 176);
   }
 `
-const FormItem=()=>{
+const FormItem:React.FC=()=>{
+    const [note,setNote]=useState('')
+    const noteRef=useRef<HTMLInputElement>(null)
+    console.log(note)
+    const onBlur=()=>{
+        if(noteRef.current!==null){
+            setNote(noteRef.current.value)
+        }
+    }
     return(
         <Div>
             <span>备注:</span>
-            <input type="text" placeholder="写点备注吧"/>
+            <input type="text" placeholder="写点备注吧"
+                   ref={noteRef}
+                   defaultValue={note}
+                   onBlur={onBlur}
+            />
         </Div>
     )
 }
