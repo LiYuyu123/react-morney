@@ -40,7 +40,14 @@ const Div=styled.div`
 
 
 const NumberPad:React.FC=()=>{
-    const {output,setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
+    const {output,_setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
+    const setOutput=(output:string)=>{
+       if(output.length===12){
+           return
+       }else {
+           _setOutput(output)
+       }
+    }
     const onButtonWrapper=(e:React.MouseEvent)=>{
         const text= (e.target as HTMLButtonElement).textContent
         if(text===null){return}
@@ -55,7 +62,6 @@ const NumberPad:React.FC=()=>{
               case '7':
               case '8':
               case '9':
-              case '.':
                   if(output==='0'){
                       setOutput(text)
                   }else {
@@ -63,10 +69,18 @@ const NumberPad:React.FC=()=>{
                   }
                   break;
               case '删除':
-                  console.log('删除')
+                 if(output.length===1){
+                     setOutput('0')
+                 }else {
+                     setOutput(output.slice(0,-1))
+                 }
                   break;
               case '清空':
-                  console.log('清空')
+                  setOutput('0')
+                  break;
+              case '.':
+                  if(output.indexOf('.')>=0){return}
+                  setOutput(output+'.')
                   break;
               case 'ok':
                   console.log('ok')

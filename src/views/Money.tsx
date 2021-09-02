@@ -17,18 +17,18 @@ const MyLayout=styled(Layout)`
 `
 type ContextType= {
     output: string
-    setOutput:  React.Dispatch<React.SetStateAction<string>>
+    _setOutput:  React.Dispatch<React.SetStateAction<string>>
     appear:boolean
     setAppear: React.Dispatch<React.SetStateAction<boolean>>
 }
 export const TypeNumberPad=createContext<ContextType | null>(null)
 
 function Money() {
-    const [output,setOutput]=useState('0')
+    const [output,_setOutput]=useState('0')
     const [appear,setAppear]=useState(false)
     return (
         <MyLayout>
-            <TypeNumberPad.Provider value={{output,setOutput,appear,setAppear}}>
+            <TypeNumberPad.Provider value={{output,_setOutput,appear,setAppear}}>
             <Type/>
             <FormItem/>
             <div className="wrapperTags">

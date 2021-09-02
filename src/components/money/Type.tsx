@@ -44,7 +44,7 @@ const Did = styled.div`
   }
 `;
 const Type: React.FC = () => {
-    const {output,setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
+    const {output,setAppear}=useContext<any>(TypeNumberPad)
     const [type, setType] = useState( '-');
     const [state, setState] = useState(false);
     const onClick = () => {
