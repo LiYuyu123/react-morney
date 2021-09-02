@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import "./index.scss"
 import './helper.scss'
 
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 

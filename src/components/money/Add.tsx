@@ -1,7 +1,8 @@
 import 'antd/dist/antd.css';
 import { Modal, Button ,Input } from 'antd';
-import {useState} from 'react';
+import {createContext, useContext, useRef, useState} from 'react';
 import styled from 'styled-components';
+import {AllTags} from './tags';
 
 const Div=styled.div`
  .addButton{
@@ -13,28 +14,40 @@ const Div=styled.div`
    !important;
  }
 `
+
 const Add= () => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+    const [newTag,setNewTag]=useState<any>(null)
+    // @ts-ignore
+    const {tags,setTags}=useContext(AllTags)
 
     const showModal = () => {
         setIsModalVisible(true);
     };
-
     const handleOk = () => {
         setIsModalVisible(false);
+      if(newTag!==undefined){
+         setTags([...tags,newTag])
+      }
     };
 
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+    const inputChange=(e:any)=>{
+        const tagName=e.target.value
+        if(tagName!=='') {
+            setNewTag(tagName)
+        }
 
+    }
     return (
         <Div>
             <Button type="primary" onClick={showModal} className="addButton">
                 新增标签
             </Button>
             <Modal title="新增标签" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <Input placeholder="写点什么吧" />
+                <Input placeholder="写点什么吧" onChange={inputChange} />
             </Modal>
         </Div>
     );
