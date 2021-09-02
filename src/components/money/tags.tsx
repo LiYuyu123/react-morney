@@ -25,7 +25,7 @@ const Ul=styled.ul`
      }
    }
 `
-const Tags = () => {
+const Tags = (props:any) => {
     return (
         <Div>
             <Add/>

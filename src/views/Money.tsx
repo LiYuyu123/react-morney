@@ -5,32 +5,29 @@ import NumberPad from '../components/money/NumberPad';
 import Tags from '../components/money/tags';
 import FormItem from '../components/money/FormItem';
 import styled from 'styled-components';
-import Nav from '../components/Nav';
 
-const Section=styled.section`
-   display: flex;
-   flex-direction: column;
-   min-height: 100vh;
+const MyLayout=styled(Layout)`
   background: white;
-  !important;
+  display: flex;
+  flex-direction: column;
   .wrapperTags{
     flex-grow: 1;
     overflow: auto;
   }
 `
+
 function Money() {
     return (
-        <Section>
+        <MyLayout>
             <Type/>
             <FormItem/>
             <div className="wrapperTags">
                 <Tags/>
             </div>
-            <div className="wrapperNumber">
-                <NumberPad/>
-                <Nav/>
-            </div>
-        </Section>
+            <NumberPad/>
+        </MyLayout>
+
+
     );
 }
 
