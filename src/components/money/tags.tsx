@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Icon from '../Icon';
 import Add from './Add';
 import {useTags} from '../../useTags';
+import {createId} from '../../lib/createId';
 
 const Div=styled.div`
   margin: 20px 40px;
@@ -32,10 +33,7 @@ const Ul=styled.ul`
 
 
 
-type Tag={
-    id:number,
-    name:string
-}
+
 
 type Props={
     value:number[],
@@ -57,7 +55,7 @@ const Tags:React.FC<Props> = (props) => {
         <Div>
             <Add  value={tags}
                   onChange={(value)=>{
-                      setTags([...tags,{id:Math.random(),name:value}])
+                      setTags([...tags,{id:createId(),name:value}])
                   }
                   }
             />
