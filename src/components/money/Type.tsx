@@ -43,9 +43,14 @@ const Did = styled.div`
     border-radius: 8px;
   }
 `;
-const Type: React.FC = () => {
-    const {output,setAppear}=useContext<any>(TypeNumberPad)
-    const [type, setType] = useState( '-');
+type Props={
+    value:'-'|'+',
+    output:number,
+    onChange:(value:'-'|'+')=>void
+}
+const Type: React.FC<Props> = (props) => {
+    const {setAppear}=useContext<any>(TypeNumberPad)
+    const type=props.value
     const [state, setState] = useState(false);
     const onClick = () => {
         setState(true);
@@ -54,16 +59,16 @@ const Type: React.FC = () => {
     const onClick2 = () => {
         setState(false);
         if(type==='-'){
-            setType( '+');
+            props.onChange( '+');
         }else {
-            setType( '-');
+            props.onChange( '-');
         }
     };
     return (
         <Did>
             <div className="type" onClick={onClick}>{type==='+' ? <span>收入</span>: <span>支出</span>}<Icon name="下拉"/></div>
             {state ? <div className="pay" onClick={onClick2}>{type==='+' ? <span>支出</span>: <span>收入</span>}</div> : ''}
-            <div className="output" onClick={()=>setAppear(true)}>{output}</div>
+            <div className="output" onClick={()=>setAppear(true)}>{props.output}</div>
         </Did>
     )
 }

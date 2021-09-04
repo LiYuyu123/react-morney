@@ -7,6 +7,7 @@ import {AllTags} from './tags';
 const Div=styled.div`
  .addButton{
    box-shadow: none;
+   text-shadow:none;
    color:rgb(255, 217, 28) ;
    border: none;
    border-bottom: 1px solid rgb(255, 217, 28);

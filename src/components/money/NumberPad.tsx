@@ -2,58 +2,39 @@ import React, {useContext} from 'react';
 import Icon from '../Icon';
 import {TypeNumberPad} from '../../views/Money';
 import {Div} from './numberPad/numberPadCss';
+import {generateOutput} from './numberPad/generateOutput';
 
 
-
-const NumberPad:React.FC=()=>{
-    const {output,_setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
+type Props={
+    value:number,
+    onChange:(value:number)=>void,
+    onOk?:()=>void
+}
+const NumberPad:React.FC<Props> =(props)=>{
+    const {appear,setAppear}=useContext<any>(TypeNumberPad)
+    const output=props.value.toString()
     const setOutput=(output:string)=>{
-       if(output.length===13){
-           return
+        let value
+       if(output.length>13){
+           value=parseFloat(output.slice(0,13))
+       }else if(output.length===0){
+           value=0
        }else {
-           _setOutput(output)
+           value=parseFloat(output)
        }
+       props.onChange(value)
     }
     const onButtonWrapper=(e:React.MouseEvent)=>{
         const text= (e.target as HTMLButtonElement).textContent
         if(text===null){return}
-        switch (text) {
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-                if (output === '0') {
-                    setOutput(text) ;
-                } else {
-                    setOutput( output + text)
-                }
-                break;
-            case '删除':
-                if (output.length === 1) {
-                    setOutput('0') ;
-                } else {
-                    setOutput( output.slice(0, -1) )
-                }
-                break;
-            case '清空':
-                setOutput('0')
-                break;
-            case '.':
-                if (output.indexOf('.') >= 0) {
-                    return;
-                }
-                setOutput( output + '.')
-                break;
-            case 'ok':
-                console.log('1')
-                break;
-        }
+         if(text==='ok'){
+             if(props.onOk){props.onOk()}
+             return;
+         }
+         if('0123456789.'.split('').concat(['删除','清空']).indexOf(text)>=0){
+                 // @ts-ignore
+             setOutput(generateOutput(text,output))
+         }
     }
     return(
         <Div>

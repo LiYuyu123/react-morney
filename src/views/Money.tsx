@@ -16,25 +16,65 @@ const MyLayout=styled(Layout)`
   }
 `
 type ContextType= {
-    output: string
-    _setOutput:  React.Dispatch<React.SetStateAction<string>>
     appear:boolean
     setAppear: React.Dispatch<React.SetStateAction<boolean>>
 }
+type types='-' |'+'
 export const TypeNumberPad=createContext<ContextType | null>(null)
-
 function Money() {
-    const [output,_setOutput]=useState('0')
     const [appear,setAppear]=useState(false)
+    const [selected,setSelected]=useState({
+        tags:[] as string[],
+        note:'',
+        type:'-' as types,
+        amount:0
+    })
     return (
         <MyLayout>
-            <TypeNumberPad.Provider value={{output,_setOutput,appear,setAppear}}>
-            <Type/>
-            <FormItem/>
+            {selected.type}
+            <hr/>
+            {selected.note}
+            <hr/>
+            {selected.tags}
+            <hr/>
+            {selected.amount}
+            <TypeNumberPad.Provider value={{appear,setAppear}}>
+            <Type value={selected.type}
+                  output={selected.amount}
+                  onChange={(value)=>{
+                      setSelected({
+                          ...selected,
+                          type:value
+                      })
+                  }}
+            />
+            <FormItem  value={selected.note}
+                       onChange={(value)=>{
+                           setSelected({
+                               ...selected,
+                               note:value
+                           })
+                       }}
+            />
             <div className="wrapperTags">
-                <Tags/>
+                <Tags value={selected.tags}
+                      onChange={(value)=>{
+                          setSelected({
+                              ...selected,
+                              tags: value
+                          })
+                      }}
+                />
             </div>
-            <NumberPad/>
+            <NumberPad value={selected.amount}
+                       onChange={(value)=>{
+                           setSelected({
+                               ...selected,
+                               amount: value
+                           })
+                       }}
+                       onOk={()=>{}}
+            />
             </TypeNumberPad.Provider>
         </MyLayout>
 

@@ -34,19 +34,22 @@ type ContextType= {
     tags: string[]
     setTags:  React.Dispatch<React.SetStateAction<string[]>>
 }
-
 export const AllTags=createContext<ContextType | null>(null);
 
-const Tags:React.FC = () => {
+type Props={
+    value:string[],
+    onChange:(value:string[])=>void
+}
+const Tags:React.FC<Props> = (props) => {
     const [tags,setTags]=useState<string[]>(['衣','食','住','行'])
-    const [selectedTags,setSelectedTags]=useState<string[]>([])
+    const selectedTags=props.value
     const onToggleTags=(tag:string)=>{
           const index=selectedTags.indexOf(tag)
         if(index>=0){
             //如果tag被选中，就复制没有被选择的tag，作为新的selectedTags
-            setSelectedTags(selectedTags.filter(t=>t!==tag))
+            props.onChange(selectedTags.filter(t=>t!==tag))
         }else {
-            setSelectedTags([...selectedTags,tag])
+            props.onChange([...selectedTags,tag])
         }
     }
     return (

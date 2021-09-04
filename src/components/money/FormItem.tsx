@@ -18,13 +18,16 @@ const Div=styled.div`
     color: rgb(176, 176, 176);
   }
 `
-const FormItem:React.FC=()=>{
-    const [note,setNote]=useState('')
+type Props={
+    value:string,
+    onChange:(value:string)=>void
+}
+const FormItem:React.FC<Props> =(props)=>{
     const noteRef=useRef<HTMLInputElement>(null)
-    console.log(note)
+    const note=props.value
     const onBlur=()=>{
         if(noteRef.current!==null){
-            setNote(noteRef.current.value)
+            props.onChange(noteRef.current.value)
         }
     }
     return(
