@@ -42,7 +42,7 @@ const Nav=()=>{
         <NavWrapper>
             <ol>
                 <li>
-                    <NavLink className="link" to="/labels" activeClassName="selected">
+                    <NavLink className="link" to="/labels" exact activeClassName="selected">
                         <Icon name="label"/>
                         <span>标签</span>
                     </NavLink>
