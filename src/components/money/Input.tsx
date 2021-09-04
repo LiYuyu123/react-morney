@@ -3,11 +3,10 @@ import styled from 'styled-components';
 
 const Label=styled.label`
   display: flex;
-  margin:20px;
+  margin:10px 20px;
   padding-left: 10px;
   >span{
-    color:rgb(176, 176, 176) ;
-    font-size: 14px;
+    font-size: 16px;
   }
   >input{
     border: none;
@@ -19,13 +18,14 @@ const Label=styled.label`
 `
 type Props={
     label:string
+    className?:string
 } & React.InputHTMLAttributes<HTMLInputElement>
 const Input:React.FC<Props> =(props)=>{
-    const {label,children,...rest}=props
+    const {label,children,className,...rest}=props
     return(
         <Label>
             <span>{props.label}</span>
-            <input {...rest}/>
+            <input {...rest} className={props.className}/>
         </Label>
     )
 }

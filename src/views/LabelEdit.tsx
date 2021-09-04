@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
+import Input from '../components/money/Input';
 
 
 const Header=styled.header`
@@ -15,13 +16,32 @@ const Header=styled.header`
  font-size: 24px;
  background: white;
 `
+const InputWrapper=styled.div`
+    background: white;
+    padding: 1px;
+  margin-top: 10px;
+`
+const ButtonWrapper=styled.div`
+  text-align: center;
+  padding: 16px;
+  margin-top: 44-16px;
+   >button{
+     background: #b62f2f;
+     color: white;
+     border-radius: 4px;
+     border: none;
+     height: 40px;
+     padding: 0 16px;
+   }
+`
+
 type Params={
  id:string
 }
 const LabelEdit:React.FC=()=>{
- const {findTag}=useTags()
- const {id}=useParams<Params>()
- const tag=findTag(parseInt(id))
+ const {findTag,updateTag}=useTags()
+ const {id:idString}=useParams<Params>()
+ const tag=findTag(parseInt(idString))
  return(
     <Layout>
      <Header>
@@ -29,10 +49,14 @@ const LabelEdit:React.FC=()=>{
        <span>编辑</span>
        <Icon />
      </Header>
-
-     <div>
+      <InputWrapper>
+          <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
+                 onChange={(e)=>{updateTag(tag.id,{name:e.target.value})}}
+          />
+      </InputWrapper>
+     <ButtonWrapper>
       <button>删除</button>
-     </div>
+     </ButtonWrapper>
     </Layout>
  )
 }
