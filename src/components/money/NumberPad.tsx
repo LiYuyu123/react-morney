@@ -1,48 +1,14 @@
 import React, {useContext} from 'react';
-import styled from 'styled-components';
 import Icon from '../Icon';
 import {TypeNumberPad} from '../../views/Money';
+import {Div} from './numberPad/numberPadCss';
 
-const Div=styled.div`
-   .topButton{
-     background: #F0EFF4;
-     text-align: center;
-     margin-bottom: 5px;
-   }
-  .buttons {
-    display: grid;
-    grid-template-columns: repeat(4,25%);
-    grid-template-rows: repeat(4, 56px);
-    background: #F0EFF4;
-    padding: 6px 10px;
-    button {
-      font-size: 22px;
-      background: #F3F3F3;
-      margin: 3px;
-      border: 1px solid #CACACA;
-      &.ok{
-        color: white;
-        font-size: 20px;
-        font-weight: lighter;
-        background: #1671CE;
-        grid-row-start: 3;
-        grid-row-end: 5;
-        grid-column-start: 4;
-        grid-column-end:5;
-      }
-      &.zero {
-        grid-column-start: 2;
-        grid-column-end: 4;
-      }
-    }
-  }
-`
 
 
 const NumberPad:React.FC=()=>{
     const {output,_setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
     const setOutput=(output:string)=>{
-       if(output.length===12){
+       if(output.length===13){
            return
        }else {
            _setOutput(output)
@@ -51,41 +17,43 @@ const NumberPad:React.FC=()=>{
     const onButtonWrapper=(e:React.MouseEvent)=>{
         const text= (e.target as HTMLButtonElement).textContent
         if(text===null){return}
-          switch (text){
-              case '0':
-              case '1':
-              case '2':
-              case '3':
-              case '4':
-              case '5':
-              case '6':
-              case '7':
-              case '8':
-              case '9':
-                  if(output==='0'){
-                      setOutput(text)
-                  }else {
-                      setOutput(output+text)
-                  }
-                  break;
-              case '删除':
-                 if(output.length===1){
-                     setOutput('0')
-                 }else {
-                     setOutput(output.slice(0,-1))
-                 }
-                  break;
-              case '清空':
-                  setOutput('0')
-                  break;
-              case '.':
-                  if(output.indexOf('.')>=0){return}
-                  setOutput(output+'.')
-                  break;
-              case 'ok':
-                  console.log('ok')
-                  break;
-          }
+        switch (text) {
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                if (output === '0') {
+                    setOutput(text) ;
+                } else {
+                    setOutput( output + text)
+                }
+                break;
+            case '删除':
+                if (output.length === 1) {
+                    setOutput('0') ;
+                } else {
+                    setOutput( output.slice(0, -1) )
+                }
+                break;
+            case '清空':
+                setOutput('0')
+                break;
+            case '.':
+                if (output.indexOf('.') >= 0) {
+                    return;
+                }
+                setOutput( output + '.')
+                break;
+            case 'ok':
+                console.log('1')
+                break;
+        }
     }
     return(
         <Div>
