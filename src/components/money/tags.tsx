@@ -30,11 +30,8 @@ const Ul=styled.ul`
 `
 
 
-type ContextType= {
-    tags: string[]
-    setTags:  React.Dispatch<React.SetStateAction<string[]>>
-}
-export const AllTags=createContext<ContextType | null>(null);
+
+
 
 type Props={
     value:string[],
@@ -54,8 +51,12 @@ const Tags:React.FC<Props> = (props) => {
     }
     return (
         <Div>
-            <AllTags.Provider value={{tags,setTags}}>
-            <Add/>
+            <Add  value={tags}
+                  onChange={(value)=>{
+                     setTags([...tags,value])
+                  }
+                  }
+            />
             <Ul>
                 {tags.map(tag=>{
                     if(['衣','食','住','行'].indexOf(tag)>=0){
@@ -65,7 +66,6 @@ const Tags:React.FC<Props> = (props) => {
                     }
                 })}
             </Ul>
-            </AllTags.Provider>
         </Div>
     );
 };

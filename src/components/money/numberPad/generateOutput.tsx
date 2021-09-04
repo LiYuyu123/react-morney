@@ -23,7 +23,7 @@ const generateOutput=(text:string,output='0')=>{
             }
         case '.':
             if (output.indexOf('.') >= 0) {
-                return;
+                return output;
             }
             return output + '.'
         case '清空':

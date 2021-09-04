@@ -34,6 +34,7 @@ const NumberPad:React.FC<Props> =(props)=>{
          if('0123456789.'.split('').concat(['删除','清空']).indexOf(text)>=0){
                  // @ts-ignore
              setOutput(generateOutput(text,output))
+
          }
     }
     return(

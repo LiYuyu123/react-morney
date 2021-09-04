@@ -1,8 +1,8 @@
 import 'antd/dist/antd.css';
 import { Modal, Button ,Input } from 'antd';
-import { useContext,  useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import {AllTags} from './tags';
+
 
 const Div=styled.div`
  .addButton{
@@ -15,19 +15,20 @@ const Div=styled.div`
    !important;
  }
 `
-
-const Add= () => {
+type Props={
+    value:string[],
+    onChange:(value:string)=>void
+}
+const Add:React.FC<Props> = (props) => {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const [newTag,setNewTag]=useState<any>(null)
-    const {tags,setTags}=useContext<any>(AllTags)
-
     const showModal = () => {
         setIsModalVisible(true);
     };
     const handleOk = () => {
         setIsModalVisible(false);
       if(newTag!==undefined){
-         setTags([...tags,newTag])
+        props.onChange(newTag)
       }
     };
 

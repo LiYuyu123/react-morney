@@ -29,6 +29,12 @@ function Money() {
         type:'-' as types,
         amount:0
     })
+   const onChange=(obj:Partial<typeof selected>)=>{
+        setSelected({
+            ...selected,
+            ...obj
+        })
+   }
     return (
         <MyLayout>
             {selected.type}
@@ -41,38 +47,18 @@ function Money() {
             <TypeNumberPad.Provider value={{appear,setAppear}}>
             <Type value={selected.type}
                   output={selected.amount}
-                  onChange={(value)=>{
-                      setSelected({
-                          ...selected,
-                          type:value
-                      })
-                  }}
+                  onChange={value=>onChange({type:value}) }
             />
             <FormItem  value={selected.note}
-                       onChange={(value)=>{
-                           setSelected({
-                               ...selected,
-                               note:value
-                           })
-                       }}
+                       onChange={value=>onChange({note:value}) }
             />
             <div className="wrapperTags">
                 <Tags value={selected.tags}
-                      onChange={(value)=>{
-                          setSelected({
-                              ...selected,
-                              tags: value
-                          })
-                      }}
+                      onChange={value=>onChange({tags:value}) }
                 />
             </div>
             <NumberPad value={selected.amount}
-                       onChange={(value)=>{
-                           setSelected({
-                               ...selected,
-                               amount: value
-                           })
-                       }}
+                       onChange={value=>onChange({amount:value}) }
                        onOk={()=>{}}
             />
             </TypeNumberPad.Provider>
