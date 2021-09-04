@@ -24,7 +24,7 @@ export const TypeNumberPad=createContext<ContextType | null>(null)
 function Money() {
     const [appear,setAppear]=useState(false)
     const [selected,setSelected]=useState({
-        tags:[] as string[],
+        tags:[] as number[],
         note:'',
         type:'-' as types,
         amount:0

@@ -16,7 +16,7 @@ const Div=styled.div`
  }
 `
 type Props={
-    value:string[],
+    value:{id:number,name:string}[],
     onChange:(value:string)=>void
 }
 const Add:React.FC<Props> = (props) => {

@@ -32,38 +32,41 @@ const Ul=styled.ul`
 
 
 
-
+type Tag={
+    id:number,
+    name:string
+}
 
 type Props={
-    value:string[],
-    onChange:(value:string[])=>void
+    value:number[],
+    onChange:(value:number[])=>void
 }
 const Tags:React.FC<Props> = (props) => {
     const {tags,setTags}=useTags()
-    const selectedTags=props.value
-    const onToggleTags=(tag:string)=>{
-          const index=selectedTags.indexOf(tag)
+    const selectedTagIds=props.value
+    const onToggleTags=(tagId:number)=>{
+        const index=selectedTagIds.indexOf(tagId)
         if(index>=0){
             //如果tag被选中，就复制没有被选择的tag，作为新的selectedTags
-            props.onChange(selectedTags.filter(t=>t!==tag))
+            props.onChange(selectedTagIds.filter(t=>t!==tagId))
         }else {
-            props.onChange([...selectedTags,tag])
+            props.onChange([...selectedTagIds,tagId])
         }
     }
     return (
         <Div>
             <Add  value={tags}
                   onChange={(value)=>{
-                     setTags([...tags,value])
+                      setTags([...tags,{id:Math.random(),name:value}])
                   }
                   }
             />
             <Ul>
                 {tags.map(tag=>{
-                    if(['衣','食','住','行'].indexOf(tag)>=0){
-                      return  <li key={tag} onClick={()=>{onToggleTags(tag)}} className={selectedTags.indexOf(tag)>=0 ? 'selected':''}><Icon name={tag}/><span>{tag}</span> </li>
+                    if(['衣','食','住','行'].indexOf(tag.name)>=0){
+                        return  <li key={tag.id} onClick={()=>{onToggleTags(tag.id)}} className={selectedTagIds.indexOf(tag.id)>=0 ? 'selected':''}><Icon name={tag.name}/><span>{tag.name}</span> </li>
                     }else{
-                      return   <li key={tag} onClick={()=>{onToggleTags(tag)}} className={selectedTags.indexOf(tag)>=0 ? 'selected':''}><Icon name="其他"/><span>{tag}</span> </li>
+                        return   <li key={tag.id} onClick={()=>{onToggleTags(tag.id)}} className={selectedTagIds.indexOf(tag.id)>=0 ? 'selected':''}><Icon name="其他"/><span>{tag.name}</span> </li>
                     }
                 })}
             </Ul>
