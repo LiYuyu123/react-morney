@@ -9,6 +9,7 @@ import Money from './views/Money';
 import Labels from './views/Label';
 import Statistics from './views/Statistics';
 import NoMatch from './views/NoMatch';
+import LabelEdit from './views/LabelEdit';
 
 
 
@@ -16,13 +17,16 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/labels">
+                <Route path="/labels" exact>
                     <Labels/>
                 </Route>
-                <Route path="/statistics">
+                <Route path="/labels/:tag" exact>
+                    <LabelEdit/>
+                </Route>
+                <Route path="/statistics" exact>
                     <Statistics/>
                 </Route>
-                <Route path="/money">
+                <Route path="/money" exact>
                     <Money/>
                 </Route>
                 <Redirect exact from="/" to="/money"/> {/*默认路径*/}
