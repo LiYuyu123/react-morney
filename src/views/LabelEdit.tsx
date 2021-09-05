@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTags} from '../useTags';
-import {useParams} from 'react-router-dom';
+import {useParams,useHistory} from 'react-router-dom';
 import Layout from '../components/Layout';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
@@ -43,11 +43,14 @@ const LabelEdit: React.FC = () => {
     const {findTag, updateTag, deleteTag} = useTags();
     const {id: idString} = useParams<Params>();
     const tag = findTag(parseInt(idString));
-
+    const history=useHistory()
+    const onClick=()=>{
+        history.goBack()
+    }
     return (
         <Layout>
             <Header>
-                <Icon name="left"/>
+                <Icon name="left" onClick={onClick}/>
                 <span>编辑</span>
                 <Icon/>
             </Header>
@@ -60,7 +63,10 @@ const LabelEdit: React.FC = () => {
                     />
                 </InputWrapper>
                 <ButtonWrapper>
-                    <button onClick={() => deleteTag(tag.id)}>删除</button>
+                    <button onClick={() => {
+                        deleteTag(tag.id)
+                        history.goBack()
+                    }}>删除</button>
                 </ButtonWrapper>
             </div> : <div>tag不存在</div>}
 
