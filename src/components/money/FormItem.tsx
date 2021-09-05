@@ -7,7 +7,6 @@ type Props={
     onChange:(value:string)=>void
 }
 const FormItem:React.FC<Props> =(props)=>{
-    const noteRef=useRef<HTMLInputElement>(null)
     const note=props.value
     const onChange: ChangeEventHandler<HTMLInputElement> =(e)=>{
       props.onChange(e.target.value)
