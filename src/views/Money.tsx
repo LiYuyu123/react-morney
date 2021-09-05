@@ -38,20 +38,18 @@ function Money() {
         })
    }
    const submit=()=>{
-        console.log('1')
-        addRecords(selected)
-        alert('保存成功')
-         setSelected({
-             tagIds:[] as number[],
-             note:'',
-             type:'-' as types,
-             amount:0
-         })
+       if(addRecords(selected)){
+           alert('保存成功')
+           setSelected({
+               tagIds:[] as number[],
+               note:'',
+               type:'-' as types,
+               amount:0
+           })
+       }
    }
     return (
         <MyLayout>
-            {JSON.stringify(selected)}
-            <hr/>
             <TypeNumberPad.Provider value={{appear,setAppear}}>
             <Type value={selected.type}
                   output={selected.amount}

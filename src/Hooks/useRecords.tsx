@@ -20,8 +20,13 @@ const useRecords=()=>{
     },[records])
 
     const addRecords=(newRecord:newRecordItem)=>{
+        if(newRecord.tagIds.length===0){
+            alert("请选择标签")
+            return false
+        }
        const record={...newRecord,createAt:new Date().toISOString()}
        setRecords([...records,record])
+        return true
     }
     return {records,addRecords}
 }
