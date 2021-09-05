@@ -17,12 +17,15 @@ const MyLayout=styled(Layout)`
   }
 `
 type ContextType= {
+    output:string
+    setOutput:React.Dispatch<React.SetStateAction<string>>
     appear:boolean
     setAppear: React.Dispatch<React.SetStateAction<boolean>>
 }
 type types='-' |'+'
 export const TypeNumberPad=createContext<ContextType | null>(null)
 function Money() {
+    const [output,setOutput]=useState('0')
     const [appear,setAppear]=useState(false)
     const [selected,setSelected]=useState({
         tagIds:[] as number[],
@@ -50,9 +53,9 @@ function Money() {
    }
     return (
         <MyLayout>
-            <TypeNumberPad.Provider value={{appear,setAppear}}>
+            {JSON.stringify(selected)}
+            <TypeNumberPad.Provider value={{output,setOutput,appear,setAppear}}>
             <Type value={selected.type}
-                  output={selected.amount}
                   onChange={value=>onChange({type:value}) }
             />
             <FormItem  value={selected.note}
@@ -63,8 +66,7 @@ function Money() {
                       onChange={value=>onChange({tagIds:value}) }
                 />
             </div>
-            <NumberPad value={selected.amount}
-                       onChange={value=>onChange({amount:value}) }
+            <NumberPad onChange={value=>onChange({amount:value}) }
                        onOk={submit}
             />
             </TypeNumberPad.Provider>

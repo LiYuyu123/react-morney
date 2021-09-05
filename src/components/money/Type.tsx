@@ -45,11 +45,10 @@ const Did = styled.div`
 `;
 type Props={
     value:'-'|'+',
-    output:number,
     onChange:(value:'-'|'+')=>void
 }
 const Type: React.FC<Props> = (props) => {
-    const {setAppear}=useContext<any>(TypeNumberPad)
+    const {output,setAppear}=useContext<any>(TypeNumberPad)
     const type=props.value
     const [state, setState] = useState(false);
     const onClick = () => {
@@ -68,7 +67,7 @@ const Type: React.FC<Props> = (props) => {
         <Did>
             <div className="type" onClick={onClick}>{type==='+' ? <span>收入</span>: <span>支出</span>}<Icon name="下拉"/></div>
             {state ? <div className="pay" onClick={onClick2}>{type==='+' ? <span>支出</span>: <span>收入</span>}</div> : ''}
-            <div className="output" onClick={()=>setAppear(true)}>{props.output}</div>
+            <div className="output" onClick={()=>setAppear(true)}>{output}</div>
         </Did>
     )
 }

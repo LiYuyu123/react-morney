@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 const useUpdate=(fn:()=>void,deps:any[])=>{
     const count=useRef(0)
     useEffect(()=>{

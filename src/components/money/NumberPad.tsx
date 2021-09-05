@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Icon from '../Icon';
 import {TypeNumberPad} from '../../views/Money';
 import {Div} from './numberPad/numberPadCss';
@@ -6,23 +6,23 @@ import {generateOutput} from './numberPad/generateOutput';
 
 
 type Props={
-    value:number,
+    value?:number,
     onChange:(value:number)=>void,
     onOk?:()=>void
 }
 const NumberPad:React.FC<Props> =(props)=>{
-    const {appear,setAppear}=useContext<any>(TypeNumberPad)
-    const output=props.value.toString()
-    const setOutput=(output:string)=>{
-        let value
+    const {output,setOutput,appear,setAppear}=useContext<any>(TypeNumberPad)
+    const setOutput2=(output:string)=>{
+        let newOutput
        if(output.length>13){
-           value=parseFloat(output.slice(0,13))
+           newOutput=output.slice(0,13)
        }else if(output.length===0){
-           value=0
+           newOutput='0'
        }else {
-           value=parseFloat(output)
+           newOutput=output
        }
-       props.onChange(value)
+       setOutput(newOutput)
+       props.onChange(parseFloat(newOutput))
     }
     const onButtonWrapper=(e:React.MouseEvent)=>{
         const text= (e.target as HTMLButtonElement).textContent
@@ -33,7 +33,7 @@ const NumberPad:React.FC<Props> =(props)=>{
          }
          if('0123456789.'.split('').concat(['删除','清空']).indexOf(text)>=0){
                  // @ts-ignore
-             setOutput(generateOutput(text,output))
+             setOutput2(generateOutput(text,output))
 
          }
     }
