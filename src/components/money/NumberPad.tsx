@@ -27,9 +27,9 @@ const NumberPad:React.FC<Props> =(props)=>{
     const onButtonWrapper=(e:React.MouseEvent)=>{
         const text= (e.target as HTMLButtonElement).textContent
         if(text===null){return}
-         if(text==='ok'){
+         if(text==='OK'){
              if(props.onOk){props.onOk()}
-             return;
+             return
          }
          if('0123456789.'.split('').concat(['删除','清空']).indexOf(text)>=0){
                  // @ts-ignore

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 import Add from './Add';
-import {useTags} from '../../useTags';
+import {useTags} from '../../Hooks/useTags';
 import {createId} from '../../lib/createId';
 
 const Div=styled.div`

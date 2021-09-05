@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import {createId} from './lib/createId';
-import {useUpdate} from './Hooks/useUpdate';
+import {createId} from '../lib/createId';
+import {useUpdate} from './useUpdate';
 
 
 const useTags=()=>{ //自定义Hook
@@ -18,7 +18,6 @@ const useTags=()=>{ //自定义Hook
        setTags(localTag)
     },[])
     useUpdate(()=>{
-        console.log('set')
         window.localStorage.setItem('tags',JSON.stringify(tags))
     },[tags])
     const findTag=(id:number)=>tags.filter(tag=>tag.id===id)[0]

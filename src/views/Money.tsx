@@ -5,6 +5,7 @@ import NumberPad from '../components/money/NumberPad';
 import Tags from '../components/money/tags';
 import FormItem from '../components/money/FormItem';
 import styled from 'styled-components';
+import {useRecords} from '../Hooks/useRecords';
 
 const MyLayout=styled(Layout)`
   background: white;
@@ -24,26 +25,33 @@ export const TypeNumberPad=createContext<ContextType | null>(null)
 function Money() {
     const [appear,setAppear]=useState(false)
     const [selected,setSelected]=useState({
-        tags:[] as number[],
+        tagIds:[] as number[],
         note:'',
         type:'-' as types,
         amount:0
     })
+    const {addRecords}=useRecords()
    const onChange=(obj:Partial<typeof selected>)=>{
         setSelected({
             ...selected,
             ...obj
         })
    }
+   const submit=()=>{
+        console.log('1')
+        addRecords(selected)
+        alert('保存成功')
+         setSelected({
+             tagIds:[] as number[],
+             note:'',
+             type:'-' as types,
+             amount:0
+         })
+   }
     return (
         <MyLayout>
-            {selected.type}
+            {JSON.stringify(selected)}
             <hr/>
-            {selected.note}
-            <hr/>
-            {selected.tags}
-            <hr/>
-            {selected.amount}
             <TypeNumberPad.Provider value={{appear,setAppear}}>
             <Type value={selected.type}
                   output={selected.amount}
@@ -53,13 +61,13 @@ function Money() {
                        onChange={value=>onChange({note:value}) }
             />
             <div className="wrapperTags">
-                <Tags value={selected.tags}
-                      onChange={value=>onChange({tags:value}) }
+                <Tags value={selected.tagIds}
+                      onChange={value=>onChange({tagIds:value}) }
                 />
             </div>
             <NumberPad value={selected.amount}
                        onChange={value=>onChange({amount:value}) }
-                       onOk={()=>{}}
+                       onOk={submit}
             />
             </TypeNumberPad.Provider>
         </MyLayout>
