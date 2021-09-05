@@ -27,7 +27,7 @@ const Add:React.FC<Props> = (props) => {
     };
     const handleOk = () => {
         setIsModalVisible(false);
-      if(newTag!==undefined){
+      if(newTag!==undefined && newTag!==''){
         props.onChange(newTag)
       }
     };
