@@ -26,7 +26,7 @@ type types='-' |'+'
 export const TypeNumberPad=createContext<ContextType | null>(null)
 function Money() {
     const [output,setOutput]=useState('0')
-    const [appear,setAppear]=useState(false)
+    const [appear,setAppear]=useState(true)
     const [selected,setSelected]=useState({
         tagIds:[] as number[],
         note:'',
@@ -53,7 +53,6 @@ function Money() {
    }
     return (
         <MyLayout>
-            {JSON.stringify(selected)}
             <TypeNumberPad.Provider value={{output,setOutput,appear,setAppear}}>
             <Type value={selected.type}
                   onChange={value=>onChange({type:value}) }

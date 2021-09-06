@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import Icon from '../Icon';
 import {TypeNumberPad} from '../../views/Money';
 import {Div} from './numberPad/numberPadCss';

@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import {useUpdate} from './useUpdate';
-import {useTags} from './useTags';
 
-type RecordItem={
+
+export type RecordItem={
     tagIds:number[],
     note:string,
     type:'-'|'+',
@@ -18,7 +18,7 @@ const useRecords=()=>{
     },[])
     useUpdate(()=>{
         window.localStorage.setItem('records',JSON.stringify(records))
-    },[records])
+    },records)
 
     const addRecords=(newRecord:newRecordItem)=>{
         if(newRecord.tagIds.length===0){
@@ -29,6 +29,9 @@ const useRecords=()=>{
        setRecords([...records,record])
         return true
     }
-    return {records,addRecords}
+    const deleteRecord=()=>{
+       setRecords([])
+    }
+    return {records,addRecords,deleteRecord}
 }
 export {useRecords}

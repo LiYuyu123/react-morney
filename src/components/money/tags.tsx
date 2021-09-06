@@ -63,9 +63,7 @@ const Tags:React.FC<Props> = (props) => {
                 {tags.map(tag=>{
                     if(['衣','食','住','行'].indexOf(tag.name)>=0){
                         return  <li key={tag.id} onClick={()=>{onToggleTags(tag.id)}} className={selectedTagIds.indexOf(tag.id)>=0 ? 'selected':''}><Icon name={tag.name}/><span>{tag.name}</span> </li>
-                    }else if(tag.name!==''){
-                        return
-                    } else {
+                    }else {
                         return   <li key={tag.id} onClick={()=>{onToggleTags(tag.id)}} className={selectedTagIds.indexOf(tag.id)>=0 ? 'selected':''}><Icon name="其他"/><span>{tag.name}</span> </li>
                     }
                 })}

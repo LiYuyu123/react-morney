@@ -19,7 +19,7 @@ const useTags=()=>{ //自定义Hook
     },[])
     useUpdate(()=>{
         window.localStorage.setItem('tags',JSON.stringify(tags))
-    },[tags])
+    },tags)
     const getName=(id:number)=>{
        const tag= tags.filter(t=>t.id===id)[0]
         return tag ? tag.name:''
@@ -37,7 +37,6 @@ const useTags=()=>{ //自定义Hook
     }
    const updateTag=(id:number,obj:{name:string})=>{
       setTags(tags.map(tag=>tag.id===id ? {id,name:obj.name}:tag))
-
 
        //  //获取你要改的tag的下标
        //  const index=findTagIndex(id)
