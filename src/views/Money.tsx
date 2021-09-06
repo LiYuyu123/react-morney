@@ -53,7 +53,7 @@ function Money() {
     }
    }
     return (
-        <MyLayout>
+        <MyLayout style={document.body.clientHeight}>
             <TypeNumberPad.Provider value={{output,setOutput,appear,setAppear}}>
                     <Type value={selected.type}
                           onChange={value=>onChange({type:value}) }

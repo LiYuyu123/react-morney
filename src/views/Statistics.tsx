@@ -136,14 +136,14 @@ function Statistics() {
                 </Ul>
             </div >
             <div className="wrapperRecord">
-                {array.map(([date, record]) => <div>
+                {array.map(([date, record]) => <div key={record.map(r=>r.createAt).toString()}>
                     <Header>
                         <span>{beautify(date)}</span>
                         <span>￥{record.reduce((sum, item) => sum + item.amount, 0)}</span>
                     </Header>
                     <div>
                         {record.map(r => {
-                            return <Item>
+                            return <Item key={r.createAt}>
                                 <div className="oneLine">
                                     {r.tags.map(t => <span key={t.id}>{t.name}</span>)
                                         .reduce((result, span, index, array) =>
