@@ -80,7 +80,7 @@ function Statistics() {
     const {getName} = useTags();
     const hash: { [k: string]: RecordItem[] } = {};
     const selectedRecord = records.filter(r => r.type === type);
-    selectedRecord.map(r => {
+    selectedRecord.forEach(r => {
         const key = day(r.createAt).format('YYYY-MM-DD');
         if (!(key in hash)) {
             hash[key] = [];
