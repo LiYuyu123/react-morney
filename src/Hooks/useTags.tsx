@@ -20,10 +20,6 @@ const useTags=()=>{ //自定义Hook
     useUpdate(()=>{
         window.localStorage.setItem('tags',JSON.stringify(tags))
     },tags)
-    const getName=(id:number)=>{
-       const tag= tags.filter(t=>t.id===id)[0]
-        return tag ? tag.name:''
-    }
     const findTag=(id:number)=>tags.filter(tag=>tag.id===id)[0]
     const findTagIndex=(id:number)=>{
         let index=-1
@@ -50,6 +46,6 @@ const useTags=()=>{ //自定义Hook
         setTags(tags.filter(tag=>tag.id!==id))
     }
 
-    return {tags,getName,setTags,findTag,updateTag,findTagIndex,deleteTag}
+    return {tags,setTags,findTag,updateTag,findTagIndex,deleteTag}
 }
 export {useTags}

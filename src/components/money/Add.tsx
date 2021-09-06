@@ -21,7 +21,7 @@ type Props={
 }
 const Add:React.FC<Props> = (props) => {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-    const [newTag,setNewTag]=useState<any>(null)
+    const [newTag,setNewTag]=useState<string>('')
     const showModal = () => {
         setIsModalVisible(true);
     };

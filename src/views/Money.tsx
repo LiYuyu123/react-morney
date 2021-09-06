@@ -29,7 +29,7 @@ function Money() {
     const [output,setOutput]=useState('0')
     const [appear,setAppear]=useState(true)
     const [selected,setSelected]=useState({
-        tagIds:[] as number[],
+        tags:[] as {id:number,name:string}[],
         note:'',
         type:'-' as types,
         amount:0
@@ -42,15 +42,15 @@ function Money() {
         })
    }
    const submit=()=>{
-       if(addRecords(selected)){
-           alert('保存成功')
-           setSelected({
-               tagIds:[] as number[],
-               note:'',
-               type:'-' as types,
-               amount:0
-           })
-       }
+        if(addRecords(selected)){
+            alert('保存成功')
+       setSelected({
+           tags:[] as {id:number,name:string}[],
+           note:'',
+           type:'-' as types,
+           amount:0
+    })
+    }
    }
     return (
         <MyLayout>
@@ -62,8 +62,8 @@ function Money() {
                                onChange={value=>onChange({note:value}) }
                     />
                     <div className="wrapperTags">
-                        <Tags value={selected.tagIds}
-                              onChange={value=>onChange({tagIds:value}) }
+                        <Tags value={selected.tags}
+                              onChange={value=>onChange({tags:value}) }
                         />
                     </div>
                     <NumberPad onChange={value=>onChange({amount:value}) }

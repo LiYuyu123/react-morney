@@ -2,7 +2,7 @@ import Layout from '../components/Layout';
 import React, {ReactNode, useState} from 'react';
 import styled from 'styled-components';
 import {RecordItem, useRecords} from '../Hooks/useRecords';
-import {useTags} from '../Hooks/useTags';
+
 import day from 'dayjs';
 
 const MyLayout=styled(Layout)`
@@ -85,7 +85,6 @@ const Footer=styled.footer`
 function Statistics() {
     const [type, setType] = useState<'-' | '+'>('-');
     const {records, deleteRecord} = useRecords();
-    const {getName} = useTags();
     const hash: { [k: string]: RecordItem[] } = {};
     const selectedRecord = records.filter(r => r.type === type);
     selectedRecord.forEach(r => {
@@ -145,13 +144,11 @@ function Statistics() {
                     <div>
                         {record.map(r => {
                             return <Item>
-                                <div className="tags oneLine">
-                                    {r.tagIds
-                                        .map(t => <span key={t}>{getName(t)}</span>)
+                                <div className="oneLine">
+                                    {r.tags.map(t => <span key={t.id}>{t.name}</span>)
                                         .reduce((result, span, index, array) =>
                                                 result.concat(index < array.length - 1 ? [span, '，'] : [span])
                                             , [] as ReactNode[])
-
                                     }
                                 </div>
                                 {r.note && <div className="note">

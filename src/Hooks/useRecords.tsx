@@ -3,7 +3,7 @@ import {useUpdate} from './useUpdate';
 
 
 export type RecordItem={
-    tagIds:number[],
+    tags:{id:number,name:string}[],
     note:string,
     type:'-'|'+',
     amount:number,
@@ -21,7 +21,7 @@ const useRecords=()=>{
     },records)
 
     const addRecords=(newRecord:newRecordItem)=>{
-        if(newRecord.tagIds.length===0){
+        if(newRecord.tags.length===0){
             alert("请选择标签")
             return false
         }

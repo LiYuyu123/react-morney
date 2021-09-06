@@ -39,19 +39,19 @@ const Ul=styled.ul`
 
 
 type Props={
-    value:number[],
-    onChange:(value:number[])=>void
+    value:{id:number,name:string}[],
+    onChange:(value:{id:number,name:string}[])=>void
 }
 const Tags:React.FC<Props> = (props) => {
     const {tags,setTags}=useTags()
-    const selectedTagIds=props.value
-    const onToggleTags=(tagId:number)=>{
-        const index=selectedTagIds.indexOf(tagId)
+    const selectedTags=props.value
+    const onToggleTags=(tag:{id:number,name:string})=>{
+        const index=selectedTags.indexOf(tag)
         if(index>=0){
             //如果tag被选中，就复制没有被选择的tag，作为新的selectedTags
-            props.onChange(selectedTagIds.filter(t=>t!==tagId))
+            props.onChange(selectedTags.filter(t=>t.id!==tag.id))
         }else {
-            props.onChange([...selectedTagIds,tagId])
+            props.onChange([...selectedTags,tag])
         }
     }
     return (
@@ -65,11 +65,14 @@ const Tags:React.FC<Props> = (props) => {
             <Ul>
                 {tags.map(tag=>{
                     if(['衣','食','住','行'].indexOf(tag.name)>=0){
-                        return  <li key={tag.id} onClick={()=>{onToggleTags(tag.id)}} className={selectedTagIds.indexOf(tag.id)>=0 ? 'selected':''}><Icon name={tag.name}/><span>{tag.name}</span> </li>
-                    }else {
-                        return   <li key={tag.id} onClick={()=>{onToggleTags(tag.id)}} className={selectedTagIds.indexOf(tag.id)>=0 ? 'selected':''}><Icon name="其他"/><span>{tag.name}</span> </li>
+                        return  <li key={tag.id} onClick={()=>{onToggleTags(tag)}} className={selectedTags.indexOf(tag)>=0 ? 'selected':''}><Icon name={tag.name}/><span>{tag.name}</span> </li>
+                    }else if(tag.name===''){
+                        return false
+                    } else {
+                        return   <li key={tag.id} onClick={()=>{onToggleTags(tag)}} className={selectedTags.indexOf(tag)>=0 ? 'selected':''}><Icon name="其他"/><span>{tag.name}</span> </li>
                     }
                 })}
+
             </Ul>
         </Div>
     );
