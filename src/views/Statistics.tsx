@@ -5,7 +5,15 @@ import {RecordItem, useRecords} from '../Hooks/useRecords';
 import {useTags} from '../Hooks/useTags';
 import day from 'dayjs';
 
-
+const MyLayout=styled(Layout)`
+   display: flex;
+   flex-direction: column;
+   height: 100vh;
+  .wrapperRecord{
+    flex-grow: 1;
+    overflow: auto;
+  }
+`
 const Ul = styled.ul`
   background: white;
   display: flex;
@@ -121,47 +129,49 @@ function Statistics() {
     }
 
     return (
-        <Layout>
+        <MyLayout>
             <div>
                 <Ul>
                     <li onClick={select} className={type === '-' ? 'selected' : ''}>支出</li>
                     <li onClick={select} className={type === '+' ? 'selected' : ''}>收入</li>
                 </Ul>
-            </div>
-            {array.map(([date, record]) => <div>
-                <Header>
-                    <span>{beautify(date)}</span>
-                    <span>￥{record.reduce((sum, item) => sum + item.amount, 0)}</span>
-                </Header>
-                <div>
-                    {record.map(r => {
-                        return <Item>
-                            <div className="tags oneLine">
-                                {r.tagIds
-                                    .map(t => <span key={t}>{getName(t)}</span>)
-                                    .reduce((result, span, index, array) =>
-                                            result.concat(index < array.length - 1 ? [span, '，'] : [span])
-                                        , [] as ReactNode[])
+            </div >
+            <div className="wrapperRecord">
+                {array.map(([date, record]) => <div>
+                    <Header>
+                        <span>{beautify(date)}</span>
+                        <span>￥{record.reduce((sum, item) => sum + item.amount, 0)}</span>
+                    </Header>
+                    <div>
+                        {record.map(r => {
+                            return <Item>
+                                <div className="tags oneLine">
+                                    {r.tagIds
+                                        .map(t => <span key={t}>{getName(t)}</span>)
+                                        .reduce((result, span, index, array) =>
+                                                result.concat(index < array.length - 1 ? [span, '，'] : [span])
+                                            , [] as ReactNode[])
 
-                                }
-                            </div>
-                            {r.note && <div className="note">
-                                {r.note}
-                            </div>}
-                            <div>
-                                ￥{r.amount}
-                            </div>
-                        </Item>;
-                    })}
-                </div>
-            </div>)}
-            <Div>
-                {records.length===0  ? <div className="record">目前没有相关记录</div>:''}
-            </Div>
-            <Footer>
-                <button onClick={onClick}>删除记录</button>
-            </Footer>
-        </Layout>
+                                    }
+                                </div>
+                                {r.note && <div className="note">
+                                    {r.note}
+                                </div>}
+                                <div>
+                                    ￥{r.amount}
+                                </div>
+                            </Item>;
+                        })}
+                    </div>
+                </div>)}
+                <Div>
+                    {records.length===0  ? <div className="record">目前没有相关记录</div>:''}
+                </Div>
+                <Footer>
+                    <button onClick={onClick}>删除记录</button>
+                </Footer>
+            </div>
+        </MyLayout>
     );
 }
 

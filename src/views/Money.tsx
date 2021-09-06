@@ -8,9 +8,10 @@ import styled from 'styled-components';
 import {useRecords} from '../Hooks/useRecords';
 
 const MyLayout=styled(Layout)`
-  background: white;
+ background: white;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   .wrapperTags{
     flex-grow: 1;
     overflow: auto;
@@ -54,20 +55,20 @@ function Money() {
     return (
         <MyLayout>
             <TypeNumberPad.Provider value={{output,setOutput,appear,setAppear}}>
-            <Type value={selected.type}
-                  onChange={value=>onChange({type:value}) }
-            />
-            <FormItem  value={selected.note}
-                       onChange={value=>onChange({note:value}) }
-            />
-            <div className="wrapperTags">
-                <Tags value={selected.tagIds}
-                      onChange={value=>onChange({tagIds:value}) }
-                />
-            </div>
-            <NumberPad onChange={value=>onChange({amount:value}) }
-                       onOk={submit}
-            />
+                    <Type value={selected.type}
+                          onChange={value=>onChange({type:value}) }
+                    />
+                    <FormItem  value={selected.note}
+                               onChange={value=>onChange({note:value}) }
+                    />
+                    <div className="wrapperTags">
+                        <Tags value={selected.tagIds}
+                              onChange={value=>onChange({tagIds:value}) }
+                        />
+                    </div>
+                    <NumberPad onChange={value=>onChange({amount:value}) }
+                               onOk={submit}
+                    />
             </TypeNumberPad.Provider>
         </MyLayout>
 

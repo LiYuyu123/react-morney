@@ -11,19 +11,22 @@ const Div=styled.div`
 const Ul=styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin-right: -10px;
+  margin-bottom: 0;
    >li{
      display: flex;
      justify-content: center;
      align-items: center;
      border: 1px solid #D9D9D9;;
-     width: 20%;
      border-radius: 20px;
      margin-right: 10px;
      margin-top: 10px;
      height: 30px;
      >span{
-       padding-left: 3px;
+       padding-right: 8px;
+     }
+     >svg{
+       width: 24px;
+       height: 20px;
      }
      &.selected{
        background: rgb(255, 217, 28);

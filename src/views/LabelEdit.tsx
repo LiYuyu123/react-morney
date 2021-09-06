@@ -6,7 +6,15 @@ import Icon from '../components/Icon';
 import styled from 'styled-components';
 import Input from '../components/money/Input';
 
-
+const MyLayout=styled(Layout)`
+    display: flex;
+  flex-direction: column;
+  height: 100vh;
+  >.main{
+    flex-grow: 1;
+    overflow: auto;
+  }
+`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
@@ -48,29 +56,30 @@ const LabelEdit: React.FC = () => {
         history.goBack()
     }
     return (
-        <Layout>
+        <MyLayout>
             <Header>
                 <Icon name="left" onClick={onClick}/>
                 <span>编辑</span>
                 <Icon/>
             </Header>
-            {tag ?  <div>
-                <InputWrapper>
-                    <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
-                           onChange={(e) => {
-                               updateTag(tag.id, {name: e.target.value});
-                           }}
-                    />
-                </InputWrapper>
-                <ButtonWrapper>
-                    <button onClick={() => {
-                        deleteTag(tag.id)
-                        history.goBack()
-                    }}>删除</button>
-                </ButtonWrapper>
-            </div> : <div>tag不存在</div>}
-
-        </Layout>
+            <main className="main">
+                {tag ?  <div>
+                    <InputWrapper>
+                        <Input label="标签名" type="text" placeholder="标签名" value={tag.name}
+                               onChange={(e) => {
+                                   updateTag(tag.id, {name: e.target.value});
+                               }}
+                        />
+                    </InputWrapper>
+                    <ButtonWrapper>
+                        <button onClick={() => {
+                            deleteTag(tag.id)
+                            history.goBack()
+                        }}>删除</button>
+                    </ButtonWrapper>
+                </div> : <div>tag不存在</div>}
+            </main>
+        </MyLayout>
     );
 };
 export default LabelEdit;
